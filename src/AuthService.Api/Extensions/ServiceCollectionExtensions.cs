@@ -1,3 +1,5 @@
+using AuthService.Application.Interfaces;
+using AuthService.Application.Services;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Constants;
 using AuthService.Persistence.Data;
@@ -11,9 +13,12 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, 
         IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+       services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
-                   .UseSnakeCaseNamingConvention());
+                .UseSnakeCaseNamingConvention());
+
+        // INICIALIZANDO EL SERVICIO DE EMAIL
+        services.AddScoped<IEmailService, EmailService>();
 
         services.AddHealthChecks();
 
