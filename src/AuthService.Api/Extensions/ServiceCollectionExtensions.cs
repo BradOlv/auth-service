@@ -1,7 +1,8 @@
 using AuthService.Domain.Entities;
 using AuthService.Domain.Constants;
 using AuthService.Persistence.Data;
-using Npgsql.Replication;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace AuthService.Api.Extensions;
 
