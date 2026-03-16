@@ -1,7 +1,6 @@
-using AuthService.Domain; 
 using AuthService.Domain.Entities; 
-using AuthService.Application.Services;
 using AuthService.Domain.Constants;
+using AuthService.Domain.Common; // Cambiado: Ahora apunta a Domain
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Persistence.Data;
@@ -28,7 +27,6 @@ public static class DataSeeder
             var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == RoleConstants.ADMIN_ROLE);
             if (adminRole != null)
             {
-                // Usamos el generador de string para el ID
                 string userId = UuidGenerator.GenerateUserId(); 
 
                 var adminUser = new User
@@ -42,7 +40,7 @@ public static class DataSeeder
                     UserProfile = new UserProfile
                     {
                         Id = UuidGenerator.GenerateUserId(),
-                        UserId = userId // Ahora ambos son string
+                        UserId = userId
                     },
                     UserEmail = new UserEmail
                     {
