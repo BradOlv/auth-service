@@ -1,5 +1,5 @@
-using AuthService.Application.DTOs; 
-using AuthService.Domain.Entities;
+using AuthService.Application.DTOs;
+using AuthService.Application.DTOs.Email;
 
 namespace AuthService.Application.Interfaces;
 

@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Http;
-
 namespace AuthService.Application.Interfaces;
 
 public interface ICloudinaryService
 {
-    Task<string> UploadImageAsync(IFormFile file, string fileName); // Cambiado a IFormFile
+    Task<string> UploadImageAsync(IFileData imageFile, string fileName);
+    Task<bool> DeleteImageAsync(string publicId);
     string GetDefaultAvatarUrl();
-    string GetFullImageUrl(string publicId);
+    string GetFullImageUrl(string imagePath);
 }

@@ -1,5 +1,5 @@
 // nombre del espacio de trabajo
-namespace AuthService.Domain.Enums;
+namespace AuthService.Enums;
 
 
 // Enumeración para los roles de usuario

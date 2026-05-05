@@ -1,21 +1,48 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AuthService.Domain.Entities;
 
 public class User
 {
-    public string Id { get; set; } = string.Empty; 
-    public string Name { get; set; } = string.Empty; // Añadido
-    public string Surname { get; set; } = string.Empty; // Añadido
-    public string Username { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
-    public string Role { get; set; } = "Client"; 
-    public bool Status { get; set; } = false; // Añadido (false hasta que verifique email)
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAt { get; set; } // Añadido
+    [Key]
+    [MaxLength(16)]
+    public string Id { get; set; } = string.Empty;
 
-    // Propiedades de navegación
-    public virtual UserProfile? UserProfile { get; set; }
-    public virtual UserEmail? UserEmail { get; set; }
-    public virtual UserPasswordReset? UserPasswordReset { get; set; }
-    public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    [Required(ErrorMessage = "El nombre es obligatorio")]
+    [MaxLength(25)]
+    public string Name { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "El apellido es obligatorio")]
+    [MaxLength(25)]
+    public string Surname { get; set; } = string.Empty;
+
+    [Required]
+    [MaxLength(50)]
+    public string Username { get; set; } = string.Empty;
+
+    [Required]
+    [EmailAddress] // El valor de esta propiedad debe tener un formato de correo electronico
+    public string Email { get; set; } = string.Empty;
+
+    [Required]
+    [MinLength(255)]
+    public string Password { get; set; } = string.Empty;
+    
+    public bool Status { get; set; } = true;
+
+    [Required]
+    public DateTime CreatedAt { get; set; }
+
+    [Required]
+    public DateTime UpdatedAt { get; set; }
+
+    // Relaciones de navegación solo dentro del código
+    // Esto no altera la base de datos
+    public UserProfile UserProfile { get; set; } = null!;
+    
+    public ICollection<UserRole> UserRoles { get; set; } = [];
+    
+    public UserEmail UserEmail { get; set; } = null!;
+    
+    public UserPasswordReset UserPasswordReset { get; set; } = null!;
 }

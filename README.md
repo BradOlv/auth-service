@@ -1,1 +1,1 @@
-# Auth Service - Kinal Sport
+# auth-service

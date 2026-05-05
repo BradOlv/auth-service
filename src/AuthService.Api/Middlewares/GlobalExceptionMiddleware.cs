@@ -7,10 +7,11 @@ namespace AuthService.Api.Middlewares;
 
 public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
 {
-    private static readonly JsonSerializerOptions JsonOptions = new()
+	    private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
+
         public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -23,6 +24,7 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
             await HandleExceptionAsync(context, ex);
         }
     }
+
         private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
@@ -72,6 +74,7 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
         var jsonResponse = JsonSerializer.Serialize(unified, JsonOptions);
         await context.Response.WriteAsync(jsonResponse);
     }
+
         private static ErrorResponse MapInvalidOperation(InvalidOperationException ex)
     {
         var message = ex.Message ?? string.Empty;
@@ -104,5 +107,4 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
             Detail = message
         };
     }
-    
-  }
+}

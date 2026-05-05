@@ -19,10 +19,12 @@ public class UserRole
     [ForeignKey(nameof(Role))]
     public string RoleId { get; set; } = string.Empty;
 
-    [Required]
     public DateTime AssignedAt { get; set; }
 
-    // Relaciones
     public User User { get; set; } = null!;
     public Role Role { get; set; } = null!;
+
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime UpdatedAt { get; set; }
 }
